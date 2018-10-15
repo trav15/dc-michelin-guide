@@ -1,8 +1,6 @@
-# Dc::Michelin::Guide
+# DC Michelin Guide
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/dc/michelin/guide`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+### This Ruby Gem provides a CLI to learn about the Michelin-rated restaurants in the Washington, DC area. You can view the list of restaurants filtered by the four levels of distinction: Bib Gourmand, 1 Star, 2 Stars, and 3 Stars. Selecting a restaurant will provide more information including type of cuisine, location, price (in $$$$), and "Michelin Guide's Point of View" (Michelin's write-up)
 
 ## Installation
 
@@ -22,7 +20,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Type the below and follow the on screen prompts.
+
+    $ worlds-best-restaurants
 
 ## Development
 
