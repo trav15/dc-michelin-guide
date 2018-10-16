@@ -29,6 +29,8 @@ class DCMichelinGuide::CLI #Our CLI Controller
         puts "Lists Two Stars Restaurants"
       when "3"
         puts "Lists Three Stars Restaurants"
+      when "4"
+        puts "Lists Bib Gourmand Restaurants"
       when "exit"
         exit
       end
