@@ -1,3 +1,4 @@
 #!/usr/bin/env ruby
 
+require_relative '../lib/dc-michelin-guide.rb'
 DCMichelinGuide::CLI.new.call
