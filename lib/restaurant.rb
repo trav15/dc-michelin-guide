@@ -1,5 +1,9 @@
 class DCMichelinGuide::Restaurant
 
+  attr_accessor :name, :distinction, :cuisine, :location, :price, :services, :mpov #Michelin Point of View
+
+  @@all = []
+
   def self.distinctions
     puts <<-DOC
       1. One Star
