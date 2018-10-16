@@ -8,13 +8,8 @@ class DCMichelinGuide::CLI #Our CLI Controller
   end
 
   def list_distinctions
-    puts "Here are the distinctions"
-    puts <<-DOC
-      1. One Star
-      2. Two Stars
-      3. Three Stars
-      4. Bib Gourmand
-    DOC
+    puts "Here are the distinctions:"
+    @restaurant = DCMichelinGuide::Restaurant.distinctions
   end
 
   def menu
