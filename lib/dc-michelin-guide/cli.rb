@@ -22,7 +22,7 @@ class DCMichelinGuide::CLI #Our CLI Controller
       case input
       when "1"
         puts "Lists One Star Restaurants"
-        puts DCMichelinGuide::Restaurant.all
+        show_list
         binding.pry
       when "2"
         puts "Lists Two Stars Restaurants"
@@ -33,6 +33,12 @@ class DCMichelinGuide::CLI #Our CLI Controller
       when "exit"
         exit
       end
+    end
+  end
+
+  def show_list
+    DCMichelinGuide::Restaurant.all.each.with_index do |resto, index|
+      puts "#{index+1}. #{resto.name}"
     end
   end
 
