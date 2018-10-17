@@ -10,8 +10,8 @@ class DCMichelinGuide::CLI #Our CLI Controller
   def list_distinctions
     puts "Here are the distinctions:"
     @restaurant = DCMichelinGuide::Restaurant.distinctions
-    DCMichelinGuide::Scraper.new.scrape_restaurants_list
-    binding.pry
+    DCMichelinGuide::Scraper.new.make_restaurants
+    # binding.pry
   end
 
   def menu
@@ -22,6 +22,8 @@ class DCMichelinGuide::CLI #Our CLI Controller
       case input
       when "1"
         puts "Lists One Star Restaurants"
+        puts DCMichelinGuide::Restaurant.all
+        binding.pry
       when "2"
         puts "Lists Two Stars Restaurants"
       when "3"

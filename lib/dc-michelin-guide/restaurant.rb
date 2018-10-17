@@ -1,6 +1,6 @@
 class DCMichelinGuide::Restaurant
 
-  attr_accessor :name, :distinction, :cuisine, :location, :price, :services, :mpov #Michelin Point of View
+  attr_accessor :name, :url, :distinction, :cuisine, :location, :price, :services, :mpov #Michelin Point of View
 
   @@all = []
 
@@ -12,12 +12,21 @@ class DCMichelinGuide::Restaurant
       4. Bib Gourmand
     DOC
   end
-  # 
-  # def initialize(name, cuisine, location, price)
-  #   @name = name
-  #   @cuisine = cuisine
-  #   @location = location
-  #   @price = price
-  # end
+
+  def self.new_from_list(resto)
+    temp_name = resto.text.strip!.chop!.strip! #rm leading whitespace -> rm trailing "m" from <span> -> rm trailing whitespace
+    self.new(temp_name, resto['href'])
+    # binding.pry
+  end
+
+  def initialize(name, url)
+    @name = name
+    @url = "https://guide.michelin.com#{url}"
+    @@all << self
+  end
+
+  def self.all
+    @@all
+  end
 
 end
