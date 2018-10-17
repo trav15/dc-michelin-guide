@@ -1,6 +1,6 @@
 class DCMichelinGuide::Restaurant
 
-  attr_accessor :name, :url, :distinction, :cuisine, :location, :price, :services, :mpov #Michelin Point of View
+  attr_accessor :name, :url, :distinction, :cuisine, :location, :price, :services, :mpov, :resto_page#Michelin Point of View
 
   @@all = []
 
@@ -27,6 +27,24 @@ class DCMichelinGuide::Restaurant
 
   def self.all
     @@all
+  end
+
+  def resto_page #gives page of each restaurant
+    @resto_page = Nokogiri::HTML(open(self.url))
+  end
+
+  def cuisine
+    @cuisine = resto_page.css('div.content-header-desc__cuisine').text.strip
+  end
+
+  def location
+    @location = resto_page.css('div.content-header-desc__area').text.strip
+  end
+
+  def distinction
+    if resto_page.css('div.v-content-sub-title')[0].text == "Distinction"
+      @distinction = resto_page.css('div.restaurant-criteria__desc')[0].text.strip
+    end
   end
 
 end

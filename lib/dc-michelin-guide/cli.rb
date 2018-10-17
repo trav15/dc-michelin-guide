@@ -23,7 +23,7 @@ class DCMichelinGuide::CLI #Our CLI Controller
       when "1"
         puts "Lists One Star Restaurants"
         show_list
-        binding.pry
+        # binding.pry
       when "2"
         puts "Lists Two Stars Restaurants"
       when "3"
@@ -39,6 +39,7 @@ class DCMichelinGuide::CLI #Our CLI Controller
   def show_list
     DCMichelinGuide::Restaurant.all.each.with_index do |resto, index|
       puts "#{index+1}. #{resto.name}"
+      puts "#{resto.distinction}"
     end
   end
 
