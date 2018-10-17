@@ -10,6 +10,8 @@ class DCMichelinGuide::CLI #Our CLI Controller
   def list_distinctions
     puts "Here are the distinctions:"
     @restaurant = DCMichelinGuide::Restaurant.distinctions
+    DCMichelinGuide::Scraper.new.scrape_restaurants_list
+    binding.pry
   end
 
   def menu

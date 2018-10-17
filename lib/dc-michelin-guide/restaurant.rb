@@ -12,5 +12,12 @@ class DCMichelinGuide::Restaurant
       4. Bib Gourmand
     DOC
   end
+  # 
+  # def initialize(name, cuisine, location, price)
+  #   @name = name
+  #   @cuisine = cuisine
+  #   @location = location
+  #   @price = price
+  # end
 
 end
