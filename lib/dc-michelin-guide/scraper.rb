@@ -10,8 +10,9 @@ class DCMichelinGuide::Scraper
       url_fragment = "2-stars-michelin"
     elsif input == 3
       url_fragment = "3-stars-michelin"
+    elsif input == 4
+      url_fragment = "bib-gourmand"
     else
-      url_fragment "bib-gourmand"
     end
     Nokogiri::HTML(open("https://guide.michelin.com/us/washington-dc/#{url_fragment}/restaurants"))
   end

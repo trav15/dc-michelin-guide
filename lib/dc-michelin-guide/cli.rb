@@ -19,17 +19,17 @@ class DCMichelinGuide::CLI #Our CLI Controller
       input = gets.strip.downcase
       case input
       when "1"
-        DCMichelinGuide::Scraper.new.make_restaurants(input.to_i)
-        puts "Restaurants with One Star"
-        show_list
-        resto_choice
-        list_distinctions
+        puts "Restaurants with One Star:"
+        render_list(input)
       when "2"
-        puts "Lists Two Stars Restaurants"
+        puts "Restaurants with Two Stars:"
+        render_list(input)
       when "3"
-        puts "Lists Three Stars Restaurants"
+        puts "Restaurants with Three Star:"
+        render_list(input)
       when "4"
-        puts "Lists Bib Gourmand Restaurants"
+        puts "Bib Gourmand Restaurants:"
+        render_list(input)
       when "exit"
         exit
       end
@@ -40,6 +40,13 @@ class DCMichelinGuide::CLI #Our CLI Controller
     DCMichelinGuide::Restaurant.all.each.with_index do |resto, index|
       puts "#{index+1}. #{resto.name}"
     end
+  end
+
+  def render_list(input)
+    DCMichelinGuide::Scraper.new.make_restaurants(input.to_i)
+    show_list
+    resto_choice
+    list_distinctions
   end
 
   def show_restaurant(input)
