@@ -1,10 +1,11 @@
 class DCMichelinGuide::CLI #Our CLI Controller
 
   def call
+    puts "***************************************"
     puts "Michelin Restaurants in Washington, DC:"
+    puts "***************************************"
     list_distinctions
     menu
-    goodbye
   end
 
   def list_distinctions
@@ -31,6 +32,7 @@ class DCMichelinGuide::CLI #Our CLI Controller
         puts "Bib Gourmand Restaurants:"
         render_list(input)
       when "exit"
+        goodbye
         exit
       end
     end
@@ -56,6 +58,8 @@ class DCMichelinGuide::CLI #Our CLI Controller
     puts "****************************"
     puts resto.distinction
     puts "Type of Cuisine: #{resto.cuisine}"
+    puts resto.price
+    puts resto.classification
     puts "----------------------------"
     puts resto.location
     puts resto.hours
@@ -74,6 +78,6 @@ class DCMichelinGuide::CLI #Our CLI Controller
   end
 
   def goodbye
-    puts "See you next time! Bon Appetit!"
+    puts "See you next time! Bon Appétit"
   end
 end
