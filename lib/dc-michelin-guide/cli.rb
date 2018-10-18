@@ -54,22 +54,26 @@ class DCMichelinGuide::CLI #Our CLI Controller
 
   def show_restaurant(input)
     resto = DCMichelinGuide::Restaurant.all[input-1]
-    puts "****************************"
+    puts "**********************************"
     puts resto.name
-    puts "****************************"
+    puts "**********************************"
     puts resto.distinction
     puts "Type of Cuisine: #{resto.cuisine}"
     puts resto.price
     puts resto.classification
-    puts "----------------------------"
+    puts "----------------------------------"
     puts resto.location
     puts resto.hours
-    puts "----------------------------"
+    puts "----------------------------------"
     puts "Services:"
     resto.services.each do |service|
       puts "• #{service.text.strip}"
     end
-    puts "----------------------------"
+    puts "----------------------------------"
+    puts "*Michelin Guide's Point Of View*"
+    puts ""
+    puts resto.mpov.gsub(/(.{1,#{75}})(\s+|\Z)/, "\\1\n")
+    puts "----------------------------------"
   end
 
   def resto_choice
