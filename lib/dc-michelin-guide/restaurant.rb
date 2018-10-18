@@ -72,4 +72,8 @@ class DCMichelinGuide::Restaurant
     @website = resto_page.css('div.location-item__desc a.o-link')[1]['href']
   end
 
+  def hours
+    @hours = resto_page.css('div.location-item__desc p')[2].text.strip
+  end
+
 end
