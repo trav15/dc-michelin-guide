@@ -22,7 +22,8 @@ class DCMichelinGuide::CLI #Our CLI Controller
       when "1"
         puts "Lists One Star Restaurants"
         show_list
-        # binding.pry
+        resto_choice
+        list_distinctions
       when "2"
         puts "Lists Two Stars Restaurants"
       when "3"
@@ -38,12 +39,29 @@ class DCMichelinGuide::CLI #Our CLI Controller
   def show_list
     DCMichelinGuide::Restaurant.all.each.with_index do |resto, index|
       puts "#{index+1}. #{resto.name}"
-      puts resto.hours
-      # puts "Services:"
-      # resto.services.each do |service|
-      #   puts "• #{service.text.strip}"
-      # end
     end
+  end
+
+  def show_restaurant(input)
+    resto = DCMichelinGuide::Restaurant.all[input-1]
+    puts resto.name
+    puts "****************************"
+    puts resto.distinction
+    puts "Type of Cuisine: #{resto.cuisine}"
+    puts "----------------------------"
+    puts resto.location
+    puts resto.hours
+    puts "----------------------------"
+    puts "Services:"
+    resto.services.each do |service|
+      puts "• #{service.text.strip}"
+    end
+  end
+
+  def resto_choice
+    puts "Choose a restaurant for more information or type exit:"
+    input_resto = gets.strip.to_i
+    show_restaurant(input_resto)
   end
 
   def goodbye
