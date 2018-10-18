@@ -28,6 +28,10 @@ class DCMichelinGuide::Restaurant
     @@all
   end
 
+  def self.clear
+    @@all.clear
+  end
+
   def resto_page #gives page of each restaurant
     @resto_page = Nokogiri::HTML(open(self.url))
   end

@@ -49,6 +49,7 @@ class DCMichelinGuide::CLI #Our CLI Controller
     show_list
     resto_choice
     list_distinctions
+    DCMichelinGuide::Restaurant.all.clear #reset list of restos from previous distinction level
   end
 
   def show_restaurant(input)
@@ -74,7 +75,12 @@ class DCMichelinGuide::CLI #Our CLI Controller
   def resto_choice
     puts "Choose a restaurant for more information or type exit:"
     input_resto = gets.strip.to_i
-    show_restaurant(input_resto)
+    if input_resto > DCMichelinGuide::Restaurant.all.length
+      puts "That is not a valid selection"
+      resto_choice
+    else
+      show_restaurant(input_resto)
+    end
   end
 
   def goodbye
