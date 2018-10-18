@@ -53,4 +53,12 @@ class DCMichelinGuide::Restaurant
     end
   end
 
+  def price
+    if resto_page.css('div.v-content-sub-title')[2].text == "Price"
+      price_symbols = resto_page.css('div.restaurant-criteria__icon')[2].text.strip
+      price_level = resto_page.css('div.restaurant-criteria__desc')[2].text.strip
+      @price = "#{price_symbols} • #{price_level}"
+    end
+  end
+
 end

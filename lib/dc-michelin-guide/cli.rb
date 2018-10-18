@@ -38,7 +38,7 @@ class DCMichelinGuide::CLI #Our CLI Controller
   def show_list
     DCMichelinGuide::Restaurant.all.each.with_index do |resto, index|
       puts "#{index+1}. #{resto.name}"
-      puts "#{resto.classification}"
+      puts "#{resto.price}"
     end
   end
 
