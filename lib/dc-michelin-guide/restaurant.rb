@@ -1,7 +1,6 @@
 class DCMichelinGuide::Restaurant
 
-  attr_accessor :name, :url, :cuisine, :location, :distinction, :classification, :price, :services, :mpov, :resto_page#Michelin Point of View
-
+  attr_accessor :name, :url, :cuisine, :location, :distinction, :classification, :price, :services, :mpov, :hours, :website
   @@all = []
 
   def self.distinctions
@@ -67,6 +66,10 @@ class DCMichelinGuide::Restaurant
 
   def services
     @services = resto_page.css('li .service-desc')
+  end
+
+  def website
+    @website = resto_page.css('div.location-item__desc a.o-link')[1]['href']
   end
 
 end

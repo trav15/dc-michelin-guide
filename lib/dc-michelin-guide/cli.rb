@@ -38,10 +38,11 @@ class DCMichelinGuide::CLI #Our CLI Controller
   def show_list
     DCMichelinGuide::Restaurant.all.each.with_index do |resto, index|
       puts "#{index+1}. #{resto.name}"
-      puts "Services:"
-      resto.services.each do |service|
-        puts "• #{service.text.strip}"
-      end
+      puts resto.website
+      # puts "Services:"
+      # resto.services.each do |service|
+      #   puts "• #{service.text.strip}"
+      # end
     end
   end
 
