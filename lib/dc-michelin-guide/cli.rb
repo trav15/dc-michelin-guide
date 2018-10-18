@@ -10,7 +10,6 @@ class DCMichelinGuide::CLI #Our CLI Controller
   def list_distinctions
     puts "Here are the distinctions:"
     @restaurant = DCMichelinGuide::Restaurant.distinctions
-    DCMichelinGuide::Scraper.new.make_restaurants
   end
 
   def menu
@@ -20,6 +19,7 @@ class DCMichelinGuide::CLI #Our CLI Controller
       input = gets.strip.downcase
       case input
       when "1"
+        DCMichelinGuide::Scraper.new.make_restaurants(input.to_i)
         puts "Restaurants with One Star"
         show_list
         resto_choice
