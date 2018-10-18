@@ -20,7 +20,7 @@ class DCMichelinGuide::CLI #Our CLI Controller
       input = gets.strip.downcase
       case input
       when "1"
-        puts "Lists One Star Restaurants"
+        puts "Restaurants with One Star"
         show_list
         resto_choice
         list_distinctions
@@ -44,6 +44,7 @@ class DCMichelinGuide::CLI #Our CLI Controller
 
   def show_restaurant(input)
     resto = DCMichelinGuide::Restaurant.all[input-1]
+    puts "****************************"
     puts resto.name
     puts "****************************"
     puts resto.distinction
@@ -56,6 +57,7 @@ class DCMichelinGuide::CLI #Our CLI Controller
     resto.services.each do |service|
       puts "• #{service.text.strip}"
     end
+    puts "----------------------------"
   end
 
   def resto_choice
