@@ -62,7 +62,11 @@ class DCMichelinGuide::Restaurant
   end
 
   def mpov
-    @mpov= resto_page.css('div.v-content__restaurant-desc .restaurant-desc').text.strip
+    @mpov = resto_page.css('div.v-content__restaurant-desc .restaurant-desc').text.strip
+  end
+
+  def services
+    @services = resto_page.css('li .service-desc')
   end
 
 end
