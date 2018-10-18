@@ -11,7 +11,6 @@ class DCMichelinGuide::CLI #Our CLI Controller
     puts "Here are the distinctions:"
     @restaurant = DCMichelinGuide::Restaurant.distinctions
     DCMichelinGuide::Scraper.new.make_restaurants
-    # binding.pry
   end
 
   def menu
@@ -39,7 +38,7 @@ class DCMichelinGuide::CLI #Our CLI Controller
   def show_list
     DCMichelinGuide::Restaurant.all.each.with_index do |resto, index|
       puts "#{index+1}. #{resto.name}"
-      puts "#{resto.distinction}"
+      puts "#{resto.classification}"
     end
   end
 

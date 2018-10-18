@@ -1,6 +1,6 @@
 class DCMichelinGuide::Restaurant
 
-  attr_accessor :name, :url, :distinction, :cuisine, :location, :price, :services, :mpov, :resto_page#Michelin Point of View
+  attr_accessor :name, :url, :cuisine, :location, :distinction, :classification, :price, :services, :mpov, :resto_page#Michelin Point of View
 
   @@all = []
 
@@ -44,6 +44,12 @@ class DCMichelinGuide::Restaurant
   def distinction
     if resto_page.css('div.v-content-sub-title')[0].text == "Distinction"
       @distinction = resto_page.css('div.restaurant-criteria__desc')[0].text.strip
+    end
+  end
+
+  def classification
+    if resto_page.css('div.v-content-sub-title')[1].text == "Classification"
+      @classification = resto_page.css('div.restaurant-criteria__desc')[1].text.strip
     end
   end
 
