@@ -54,6 +54,7 @@ class DCMichelinGuide::CLI #Our CLI Controller
 
   def show_restaurant(input)
     resto = DCMichelinGuide::Restaurant.all[input-1]
+    DCMichelinGuide::Scraper.scrape_resto_page(resto) if !resto.distinction
     puts "**********************************"
     puts resto.name
     puts "**********************************"
@@ -66,6 +67,7 @@ class DCMichelinGuide::CLI #Our CLI Controller
     puts resto.hours
     puts "----------------------------------"
     puts "Services:"
+    binding.pry
     resto.services.each do |service|
       puts "• #{service.text.strip}"
     end

@@ -28,56 +28,9 @@ class DCMichelinGuide::Restaurant
     @@all
   end
 
-  def self.clear
-    @@all.clear
-  end
+def self.find_by_distinction(distinction)
 
-  def resto_page #gives page of each restaurant
-    @resto_page = Nokogiri::HTML(open(self.url))
-  end
+end
 
-  def cuisine
-    @cuisine = resto_page.css('div.content-header-desc__cuisine').text.strip
-  end
-
-  def location
-    @location = resto_page.css('div.content-header-desc__area').text.strip
-  end
-
-  def distinction
-    if resto_page.css('div.v-content-sub-title')[0].text == "Distinction"
-      @distinction = resto_page.css('div.restaurant-criteria__desc')[0].text.strip
-    end
-  end
-
-  def classification
-    if resto_page.css('div.v-content-sub-title')[1].text == "Classification"
-      @classification = resto_page.css('div.restaurant-criteria__desc')[1].text.strip
-    end
-  end
-
-  def price
-    if resto_page.css('div.v-content-sub-title')[2].text == "Price"
-      price_symbols = resto_page.css('div.restaurant-criteria__icon')[2].text.strip
-      price_level = resto_page.css('div.restaurant-criteria__desc')[2].text.strip
-      @price = "#{price_symbols} • #{price_level}"
-    end
-  end
-
-  def mpov
-    @mpov = resto_page.css('div.v-content__restaurant-desc .restaurant-desc').text.strip
-  end
-
-  def services
-    @services = resto_page.css('li .service-desc')
-  end
-
-  def website
-    @website = resto_page.css('div.location-item__desc a.o-link')[1]['href']
-  end
-
-  def hours
-    @hours = resto_page.css('div.location-item__desc p')[2].text.strip
-  end
 
 end
