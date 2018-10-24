@@ -18,22 +18,23 @@ class DCMichelinGuide::CLI #Our CLI Controller
     while input != "exit"
       puts "Choose your distinction or type exit:"
       input = gets.strip.downcase
-      case input
-      when "1"
+      if input == "1"
         puts "Restaurants with One Star:"
         render_list(input)
-      when "2"
+      elsif input == "2"
         puts "Restaurants with Two Stars:"
         render_list(input)
-      when "3"
+      elsif input == "3"
         puts "Restaurants with Three Star:"
         render_list(input)
-      when "4"
+      elsif input == "4"
         puts "Bib Gourmand Restaurants:"
         render_list(input)
-      when "exit"
+      elsif input == "exit"
         goodbye
         exit
+      else
+        puts "That is not a valid selection. Please try again."
       end
     end
   end
