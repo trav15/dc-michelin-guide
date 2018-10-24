@@ -79,17 +79,20 @@ class DCMichelinGuide::CLI #Our CLI Controller
   end
 
   def resto_choice
-    puts "Choose a restaurant for more information or type exit:"
+    puts "Choose a restaurant for more information or type list or exit:"
     input_resto = gets.strip.downcase
     if input_resto == "exit"
       exit
+    elsif input_resto == "list"
+      list_distinctions
+      menu
     else
-      input_resto = input_resto.to_i
-      if input_resto > DCMichelinGuide::Restaurant.all.length
+      input_integer = input_resto.to_i
+      if input_integer > DCMichelinGuide::Restaurant.all.length || input_integer < DCMichelinGuide::Restaurant.all.length
         puts "That is not a valid selection"
         resto_choice
       else
-        show_restaurant(input_resto)
+        show_restaurant(input_integer)
       end
     end
   end

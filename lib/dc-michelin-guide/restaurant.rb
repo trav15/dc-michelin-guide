@@ -23,6 +23,7 @@ class DCMichelinGuide::Restaurant
     assign_distinction(distinction_choice)
     @@all << self
     @resto_page = Nokogiri::HTML(open(self.url))
+    puts "****SCRAPING RESTAURANT******"
   end
 
   def self.all
@@ -42,7 +43,7 @@ class DCMichelinGuide::Restaurant
   end
 
   def assign_distinction(distinction_choice)
-    if distinction_choice == 1
+    if distinction_choice == "1"
       @distinction = "One Star • High quality cooking, worth a stop"
     elsif distinction_choice == "2"
       @distinction = "Two Stars • Excellent cooking, worth a detour"
