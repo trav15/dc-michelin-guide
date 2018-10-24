@@ -50,12 +50,10 @@ class DCMichelinGuide::CLI #Our CLI Controller
     show_list
     resto_choice
     list_distinctions
-    DCMichelinGuide::Restaurant.all.clear #reset list of restos from previous distinction level
   end
 
   def show_restaurant(input)
     resto = DCMichelinGuide::Restaurant.all[input-1]
-    DCMichelinGuide::Scraper.scrape_resto_page(resto) if !resto.distinction
     puts "**********************************"
     puts resto.name
     puts "**********************************"
@@ -68,7 +66,6 @@ class DCMichelinGuide::CLI #Our CLI Controller
     puts resto.hours
     puts "----------------------------------"
     puts "Services:"
-    binding.pry
     resto.services.each do |service|
       puts "• #{service.text.strip}"
     end
@@ -77,16 +74,23 @@ class DCMichelinGuide::CLI #Our CLI Controller
     puts ""
     puts resto.mpov.gsub(/(.{1,#{75}})(\s+|\Z)/, "\\1\n")
     puts "----------------------------------"
+    show_list
+    resto_choice
   end
 
   def resto_choice
     puts "Choose a restaurant for more information or type exit:"
-    input_resto = gets.strip.to_i
-    if input_resto > DCMichelinGuide::Restaurant.all.length
-      puts "That is not a valid selection"
-      resto_choice
+    input_resto = gets.strip.downcase
+    if input_resto == "exit"
+      exit
     else
-      show_restaurant(input_resto)
+      input_resto = input_resto.to_i
+      if input_resto > DCMichelinGuide::Restaurant.all.length
+        puts "That is not a valid selection"
+        resto_choice
+      else
+        show_restaurant(input_resto)
+      end
     end
   end
 

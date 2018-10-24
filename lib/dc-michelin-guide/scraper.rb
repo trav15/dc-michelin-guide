@@ -24,71 +24,13 @@ class DCMichelinGuide::Scraper
 
   def make_restaurants(input)
     scrape_restaurants_list(input).each do |resto|
-      DCMichelinGuide::Restaurant.new_from_list(resto)
+      DCMichelinGuide::Restaurant.new_from_list(resto, input)
     end
   end
 
-  def self.scrape_resto_page(restaurant) #gives page of each restaurant
+  def self.scrape_resto_page #gives page of each restaurant
     puts "************Scraping restaurant**********"
-    @resto_page ||= Nokogiri::HTML(open(restaurant.url))
-    add_attributes(restaurant)
+    @resto_page = Nokogiri::HTML(open(self.url))
   end
-
-  def self.add_attributes(restaurant)
-    restaurant.cuisine = resto_page.css('div.content-header-desc__cuisine').text.strip
-    restaurant.location = resto_page.css('div.content-header-desc__area').text.strip
-    if resto_page.css('div.v-content-sub-title')[0].text == "Distinction"
-      restaurant.distinction = resto_page.css('div.restaurant-criteria__desc')[0].text.strip
-    end
-    if resto_page.css('div.v-content-sub-title')[1].text == "Classification"
-      restaurant.classification = resto_page.css('div.restaurant-criteria__desc')[1].text.strip
-    end
-
-    if resto_page.css('div.v-content-sub-title')[2].text == "Price"
-      price_symbols = resto_page.css('div.restaurant-criteria__icon')[2].text.strip
-      price_level = resto_page.css('div.restaurant-criteria__desc')[2].text.strip
-      restaurant.price = "#{price_symbols} • #{price_level}"
-    end
-    restaurant.mpov = resto_page.css('div.v-content__restaurant-desc .restaurant-desc').text.strip
-    restaurant.services = resto_page.css('li .service-desc')
-    restaurant.website = resto_page.css('div.location-item__desc a.o-link')[1]['href']
-    restaurant.hours = resto_page.css('div.location-item__desc p')[2].text.strip
-  end
-
-  def cuisine
-
-  end
-
-  def location
-  end
-
-  def distinction
-
-  end
-
-  def classification
-
-  end
-
-  def price
-
-  end
-
-  def mpov
-
-  end
-
-  def services
-
-  end
-
-  def website
-
-  end
-
-  def hours
-
-  end
-
 
 end
