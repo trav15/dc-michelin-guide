@@ -1,6 +1,7 @@
 class DCMichelinGuide::CLI #Our CLI Controller
 
   def call
+    DCMichelinGuide::Scraper.new.make_restaurants
     puts "***************************************"
     puts "Michelin Restaurants in Washington, DC:"
     puts "***************************************"
@@ -46,7 +47,7 @@ class DCMichelinGuide::CLI #Our CLI Controller
   end
 
   def render_list(input)
-    DCMichelinGuide::Scraper.new.make_restaurants(input.to_i)
+    # DCMichelinGuide::Scraper.new.make_restaurants(input.to_i)
     show_list
     resto_choice
     list_distinctions
@@ -88,7 +89,7 @@ class DCMichelinGuide::CLI #Our CLI Controller
       menu
     else
       input_integer = input_resto.to_i
-      if input_integer > DCMichelinGuide::Restaurant.all.length || input_integer < DCMichelinGuide::Restaurant.all.length
+      if input_integer > DCMichelinGuide::Restaurant.all.length || input_integer <= 0
         puts "That is not a valid selection"
         resto_choice
       else

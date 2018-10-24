@@ -12,15 +12,14 @@ class DCMichelinGuide::Restaurant
     DOC
   end
 
-  def self.new_from_list(resto, input)
+  def self.new_from_list(resto)
     temp_name = resto.text.strip!.chop!.strip! #rm leading whitespace -> rm trailing "m" from <span> -> rm trailing whitespace
-    self.new(temp_name, resto['href'], input)
+    self.new(temp_name, resto['href'])
   end
 
-  def initialize(name, url, distinction_choice)
+  def initialize(name, url)
     @name = name
     @url = "https://guide.michelin.com#{url}"
-    assign_distinction(distinction_choice)
     @@all << self
     @resto_page = Nokogiri::HTML(open(self.url))
     puts "****SCRAPING RESTAURANT******"
