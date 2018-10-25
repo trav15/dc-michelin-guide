@@ -88,7 +88,7 @@ class DCMichelinGuide::CLI #Our CLI Controller
       menu
     else
       input_integer = input_resto.to_i
-      if input_integer > DCMichelinGuide::Restaurant.all.length || input_integer < DCMichelinGuide::Restaurant.all.length
+      if input_integer > DCMichelinGuide::Restaurant.all.length || input_integer <= 0
         puts "That is not a valid selection"
         resto_choice
       else
