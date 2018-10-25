@@ -4,13 +4,13 @@ class DCMichelinGuide::Scraper
   #make Restaurant instances for each restaurant on the list
 
   def get_page(input)
-    if input == 1
+    if input == "1"
       url_fragment = "1-star-michelin"
-    elsif input == 2
+    elsif input == "2"
       url_fragment = "2-stars-michelin"
-    elsif input == 3
+    elsif input == "3"
       url_fragment = "3-stars-michelin"
-    elsif input == 4
+    elsif input == "4"
       url_fragment = "bib-gourmand"
     end
     puts "**********Scraping Page*********"
@@ -51,30 +51,8 @@ class DCMichelinGuide::Scraper
       resto.price = "#{price_symbols} • #{price_level}"
     end
     resto.mpov = resto_page.css('div.v-content__restaurant-desc .restaurant-desc').text.strip
+    resto.services = resto_page.css('li .service-desc')
+    resto.website = resto_page.css('div.location-item__desc a.o-link')[1]['href']
+    resto.hours = resto_page.css('div.location-item__desc p')[2].text.strip
   end
-
-  def classification
-
-  end
-
-  def price
-
-  end
-
-  def mpov
-
-  end
-
-  def services
-    @services = resto_page.css('li .service-desc')
-  end
-
-  def website
-    @website = resto_page.css('div.location-item__desc a.o-link')[1]['href']
-  end
-
-  def hours
-    @hours = resto_page.css('div.location-item__desc p')[2].text.strip
-  end
-
 end

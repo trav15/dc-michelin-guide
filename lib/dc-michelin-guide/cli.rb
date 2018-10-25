@@ -55,6 +55,7 @@ class DCMichelinGuide::CLI #Our CLI Controller
   def show_restaurant(input)
     resto = DCMichelinGuide::Restaurant.all[input-1]
     #call the scraper make_resto_page to add details to restaurant if they haven't already been added
+    DCMichelinGuide::Scraper.scrape_resto_page(resto) if resto.price == nil
     puts "**********************************"
     puts resto.name
     puts "**********************************"
