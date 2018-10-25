@@ -46,7 +46,7 @@ class DCMichelinGuide::CLI #Our CLI Controller
   end
 
   def render_list(input)
-    DCMichelinGuide::Scraper.new.make_restaurants(input.to_i)
+    DCMichelinGuide::Scraper.new.make_restaurants(input) if DCMichelinGuide::Restaurant.find_by_distinction(input) == []
     show_list
     resto_choice
     list_distinctions
@@ -54,6 +54,7 @@ class DCMichelinGuide::CLI #Our CLI Controller
 
   def show_restaurant(input)
     resto = DCMichelinGuide::Restaurant.all[input-1]
+    #call the scraper make_resto_page to add details to restaurant if they haven't already been added
     puts "**********************************"
     puts resto.name
     puts "**********************************"
