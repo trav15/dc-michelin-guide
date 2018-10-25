@@ -25,7 +25,7 @@ class DCMichelinGuide::CLI #Our CLI Controller
         puts "Restaurants with Two Stars:"
         render_list(input)
       elsif input == "3"
-        puts "Restaurants with Three Star:"
+        puts "Restaurants with Three Stars:"
         render_list(input)
       elsif input == "4"
         puts "Bib Gourmand Restaurants:"
@@ -39,22 +39,22 @@ class DCMichelinGuide::CLI #Our CLI Controller
     end
   end
 
-  def show_list
-    DCMichelinGuide::Restaurant.all.each.with_index do |resto, index|
+  def show_list(distinction)
+    restaurants = DCMichelinGuide::Restaurant.find_by_distinction(distinction)
+    restaurants.each.with_index do |resto, index|
       puts "#{index+1}. #{resto.name}"
     end
   end
 
   def render_list(input)
     DCMichelinGuide::Scraper.new.make_restaurants(input) if DCMichelinGuide::Restaurant.find_by_distinction(input) == []
-    show_list
+    show_list(input)
     resto_choice
     list_distinctions
   end
 
   def show_restaurant(input)
     resto = DCMichelinGuide::Restaurant.all[input-1]
-    #call the scraper make_resto_page to add details to restaurant if they haven't already been added
     DCMichelinGuide::Scraper.scrape_resto_page(resto) if resto.price == nil
     puts "**********************************"
     puts resto.name
@@ -76,12 +76,12 @@ class DCMichelinGuide::CLI #Our CLI Controller
     puts ""
     puts resto.mpov.gsub(/(.{1,#{75}})(\s+|\Z)/, "\\1\n")
     puts "----------------------------------"
-    show_list
+    render_list(resto.distinction_number)
     resto_choice
   end
 
   def resto_choice
-    puts "Choose a restaurant for more information or type list or exit:"
+    puts "Choose a restaurant for more information or type list to see other distinctions or exit:"
     input_resto = gets.strip.downcase
     if input_resto == "exit"
       exit

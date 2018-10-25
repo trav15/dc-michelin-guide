@@ -1,7 +1,4 @@
 class DCMichelinGuide::Scraper
-  #get page
-  #scrape page to create list of restaurants
-  #make Restaurant instances for each restaurant on the list
 
   def get_page(input)
     if input == "1"
@@ -37,7 +34,7 @@ class DCMichelinGuide::Scraper
     end
   end
 
-  def self.scrape_resto_page(resto) #Add attributes
+  def self.scrape_resto_page(resto)
     puts "************Scraping restaurant**********"
     resto_page = Nokogiri::HTML(open(resto.url))
     resto.cuisine = resto_page.css('div.content-header-desc__cuisine').text.strip

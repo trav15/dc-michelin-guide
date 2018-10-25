@@ -27,7 +27,4 @@ class DCMichelinGuide::Restaurant
   def self.find_by_distinction(distinction)
     @@all.select{|resto| resto.distinction_number == distinction}
   end
-
-
-
 end
