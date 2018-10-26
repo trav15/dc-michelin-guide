@@ -10,7 +10,6 @@ class DCMichelinGuide::Scraper
     elsif input == "4"
       url_fragment = "bib-gourmand"
     end
-    puts "**********Scraping Page*********"
     Nokogiri::HTML(open("https://guide.michelin.com/us/washington-dc/#{url_fragment}/restaurants"))
   end
 
@@ -35,7 +34,6 @@ class DCMichelinGuide::Scraper
   end
 
   def self.scrape_resto_page(resto)
-    puts "************Scraping restaurant**********"
     resto_page = Nokogiri::HTML(open(resto.url))
     resto.cuisine = resto_page.css('div.content-header-desc__cuisine').text.strip
     resto.location = resto_page.css('div.content-header-desc__area').text.strip
