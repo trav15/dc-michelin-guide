@@ -1,5 +1,7 @@
 class DCMichelinGuide::CLI #Our CLI Controller
 
+  attr_accessor :current_distinction
+
   def call
     puts "***************************************"
     puts "Michelin Restaurants in Washington, DC:"
@@ -41,6 +43,7 @@ class DCMichelinGuide::CLI #Our CLI Controller
 
   def show_list(distinction)
     restaurants = DCMichelinGuide::Restaurant.find_by_distinction(distinction)
+    @current_distinction = distinction
     restaurants.each.with_index do |resto, index|
       puts "#{index+1}. #{resto.name}"
     end
@@ -54,7 +57,8 @@ class DCMichelinGuide::CLI #Our CLI Controller
   end
 
   def show_restaurant(input)
-    resto = DCMichelinGuide::Restaurant.all[input-1]
+    restos = DCMichelinGuide::Restaurant.find_by_distinction(@current_distinction)
+    resto = restos[input-1]
     DCMichelinGuide::Scraper.scrape_resto_page(resto) if resto.price == nil
     puts "**********************************"
     puts resto.name
@@ -90,7 +94,7 @@ class DCMichelinGuide::CLI #Our CLI Controller
       menu
     else
       input_integer = input_resto.to_i
-      if input_integer > DCMichelinGuide::Restaurant.all.length || input_integer <= 0
+      if input_integer > DCMichelinGuide::Restaurant.find_by_distinction(@current_distinction).length || input_integer <= 0
         puts "That is not a valid selection"
         resto_choice
       else
